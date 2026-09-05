@@ -62,6 +62,18 @@ python API.py
 
 Open <http://127.0.0.1:5000/> in a browser and enter a product description. The development server runs with Flask debug mode enabled; use a production WSGI server and deployment configuration before exposing the application publicly.
 
+## Deploy to Vercel
+
+The project includes a Vercel serverless entrypoint at `api/index.py`. From the project root:
+
+```powershell
+npm install --global vercel
+vercel login
+vercel --prod
+```
+
+When prompted, link the project to the intended Vercel account and project. In the Vercel project settings, add `ELASTICSEARCH_URL`, `ELASTICSEARCH_USERNAME`, and `ELASTICSEARCH_PASSWORD` for the Production environment, then redeploy. Upload the Elasticsearch data separately with `python upload_data.py`; Vercel only hosts the Flask search endpoint.
+
 ## Project Structure
 
 ```text
