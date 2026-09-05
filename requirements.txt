@@ -1,5 +1,4 @@
 flask
 elasticsearch
-sentence-transformers
 python-dotenv
-pandas
+requests

@@ -32,12 +32,19 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+To upload or refresh product data locally, install the additional data-loader dependencies:
+
+```powershell
+pip install -r requirements-data.txt
+```
+
 Create a local `.env` file from `.env.example` and set the Elasticsearch connection values:
 
 ```text
 ELASTICSEARCH_URL=https://your-deployment.region.gcp.elastic-cloud.com:443
 ELASTICSEARCH_USERNAME=elastic
 ELASTICSEARCH_PASSWORD=replace-with-your-password
+HF_API_TOKEN=replace-with-your-huggingface-token
 ```
 
 Never commit `.env` or share its password. The file is ignored by Git.
@@ -89,5 +96,6 @@ When prompted, link the project to the intended Vercel account and project. In t
 ## Notes
 
 - The embedding model produces 384-dimensional vectors, matching the Elasticsearch mapping in `upload_data.py`.
+- The deployed search endpoint calls Hugging Face Inference API for embeddings, while `upload_data.py` uses the local model.
 - The CSV loader uses the `ISO-8859-1` encoding and removes scraper-specific columns before indexing.
 - The application currently expects the CSV's renamed fields: `Title`, `Rating`, `Price after Discount`, `MRP`, and `Delivery By`.
